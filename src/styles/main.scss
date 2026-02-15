@@ -1,0 +1,170 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "reset";
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lexend Deca";
+  src: url("./assets/fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.text-preset-1 {
+  @include text-preset-1;
+}
+.text-preset-2 {
+  @include text-preset-2;
+}
+.text-preset-3 {
+  @include text-preset-3;
+}
+.text-preset-4 {
+  @include text-preset-4;
+}
+.text-preset-5 {
+  @include text-preset-5;
+}
+
+.white {
+  color: $white-color;
+}
+.purple-500 {
+  color: $purple-500-color;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+.opacity-75 {
+  opacity: 0.75;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  display: grid;
+  place-items: center; /*Aligne horizontalement et verticalement (uniquemnet pour display: grid) */
+  min-width: 320px; /* Sécurité pour très petit écran */
+  margin-inline: auto;
+  background: $navy-950-color;
+}
+
+main {
+  max-width: 327px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @include tablet {
+    max-width: 564px;
+  }
+  @include desktop {
+    max-width: 1110px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.header {
+  background: $purple-500-color;
+  height: 240px;
+
+  @include desktop {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+  }
+}
+
+.header picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.5;
+}
+
+.header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+}
+
+.card-content {
+  background: $blue-950-color;
+  text-align: center;
+  padding-inline: $spacing-300;
+  padding-block: $spacing-300;
+
+  @include tablet {
+    padding-inline: $spacing-1000;
+    padding-block: $spacing-800;
+  }
+
+  @include desktop {
+    grid-column: 1;
+    text-align: left;
+  }
+}
+
+.title {
+  @include text-preset-2; // Mobile
+
+  @include desktop {
+    @include text-preset-1; // Desktop
+  }
+}
+
+.description {
+  padding-block: $spacing-100 $spacing-500;
+
+  @include tablet {
+    padding-inline: $spacing-300;
+    padding-block: $spacing-300 $spacing-900;
+  }
+
+  @include desktop {
+    padding-inline: 0;
+  }
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-300;
+  text-align: center;
+
+  @include desktop {
+    text-align: left;
+  }
+}
+
+/* Chaque article de stat */
+article {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-100;
+}
+
+/* Desktop : passage en ligne */
+@include tablet {
+  .stats-container {
+    flex-direction: row;
+    justify-content: space-between; /* ou space-around ou space-evenly */
+    gap: var(--spacing-500); /* Plus d'espace horizontal */
+  }
+}
